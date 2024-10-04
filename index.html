@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Data Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="logo/png.png" alt="Sample Logo" class="logo-img">
+            <h1>Gestão de Clientes</h1>
+            <p>De forma fácil e simples armazenamos os dados dos nossos clientes com segurança, estes dados são usados para fins comerciais/anúncios personalizados!</p>
+        </div>
+        <form id="customerForm">
+            <input type="text" id="name" name="name" placeholder="Nome" required>
+            <input type="tel" id="phone" name="phone" placeholder="Telefone" required>
+            <input type="email" id="email" name="email" placeholder="E-mail" required>
+            
+            <select id="province" name="province" required>
+                <option value="" disabled selected>Selecione a Provincía</option>
+                <option value="Bengo">Bengo</option>
+                <option value="Benguela">Benguela</option>
+                <option value="Bié">Bié</option>
+                <option value="Cabinda">Cabinda</option>
+                <option value="Cuando Cubango">Cuando Cubango</option>
+                <option value="Cuanza Norte">Cuanza Norte</option>
+                <option value="Cuanza Sul">Cuanza Sul</option>
+                <option value="Cunene">Cunene</option>
+                <option value="Huambo">Huambo</option>
+                <option value="Huíla">Huíla</option>
+                <option value="Luanda">Luanda</option>
+                <option value="Lunda Norte">Lunda Norte</option>
+                <option value="Lunda Sul">Lunda Sul</option>
+                <option value="Malanje">Malanje</option>
+                <option value="Moxico">Moxico</option>
+                <option value="Namibe">Namibe</option>
+                <option value="Uíge">Uíge</option>
+                <option value="Zaire">Zaire</option>
+            </select>
+
+            <select id="lastPurchase" name="lastPurchase" required>
+                <option value="" disabled selected>Última Compra</option>
+                <option value="Electronics">Electrónicos</option>
+                <option value="Furniture">Suplemento</option>
+                <option value="Groceries">Artigos de moda</option>
+                <option value="Clothing">Brinquedos</option>
+                <option value="Beauty Products">Bijuteria</option>
+                <option value="Home Appliances">Gadget</option>
+            </select>
+
+            <button type="submit">Submeter</button>
+        </form>
+    </div>
+</body>
+</html>
+
+<script>
+    document.getElementById("customerForm").addEventListener("submit", function(event){
+        event.preventDefault();
+    
+        let formData = {
+            name: document.getElementById("name").value,
+            phone: document.getElementById("phone").value,
+            email: document.getElementById("email").value,
+            province: document.getElementById("province").value,
+            lastPurchase: document.getElementById("lastPurchase").value
+        };
+    
+        fetch('AKfycbzdPJAixgtVKnBKCqIR119uc2qwc7JiqS3VuLw4DXLqqFCmrBNzVBS9NvNQ9gYNZnx7JA', {
+            method: 'POST',
+            body: JSON.stringify(formData),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => response.json())
+        .then(data => {
+            alert('Data submitted successfully');
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+    </script>
+    
